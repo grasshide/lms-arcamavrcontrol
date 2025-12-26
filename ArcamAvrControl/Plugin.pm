@@ -1,7 +1,8 @@
-package Slim::Plugin::ArcamAvrControl::Plugin;
+package Plugins::ArcamAvrControl::Plugin;
 
 # Lyrion Music Server / Logitech Media Server plugin
 # Basic network control for Arcam AVR380 (power, volume, direct mode)
+
 
 use strict;
 use base qw(Slim::Plugin::Base);
@@ -15,7 +16,7 @@ use Slim::Utils::Prefs;
 use Slim::Utils::Timers;
 
 if ( main::WEBUI ) {
-	require Slim::Plugin::ArcamAvrControl::Settings;
+	require Plugins::ArcamAvrControl::Settings;
 }
 
 my $log = Slim::Utils::Log->addLogCategory({
@@ -94,7 +95,7 @@ sub initPlugin {
 	$prefs->setValidate(\&_validateBool01OrEmpty, 'directOnPowerOn');
 
 	if ( main::WEBUI ) {
-		Slim::Plugin::ArcamAvrControl::Settings->new;
+		Plugins::ArcamAvrControl::Settings->new;
 	}
 
 	# Subscribe to player power changes

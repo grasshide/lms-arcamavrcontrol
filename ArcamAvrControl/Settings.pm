@@ -1,4 +1,4 @@
-package Slim::Plugin::ArcamAvrControl::Settings;
+package Plugins::ArcamAvrControl::Settings;
 
 # Lyrion Music Server / Logitech Media Server plugin settings
 
@@ -10,15 +10,8 @@ use Slim::Utils::Strings qw(string);
 
 my $prefs = preferences('plugin.arcamavrcontrol');
 
-my $csrfAvailable = eval {
-	require Slim::Web::HTTP::CSRF;
-	1;
-};
-
 sub name {
-	return $csrfAvailable
-		? Slim::Web::HTTP::CSRF->protectName('PLUGIN_ARCAMAVRCONTROL_NAME')
-		: 'PLUGIN_ARCAMAVRCONTROL_NAME';
+	return Slim::Web::HTTP::CSRF->protectName('PLUGIN_ARCAMAVRCONTROL_NAME');
 }
 
 sub needsClient {
@@ -26,9 +19,7 @@ sub needsClient {
 }
 
 sub page {
-	return $csrfAvailable
-		? Slim::Web::HTTP::CSRF->protectURI('plugins/ArcamAvrControl/settings/basic.html')
-		: 'plugins/ArcamAvrControl/settings/basic.html';
+	return Slim::Web::HTTP::CSRF->protectURI('plugins/ArcamAvrControl/settings/basic.html');
 }
 
 sub handler {
@@ -40,7 +31,7 @@ sub handler {
 		return $class->SUPER::handler($client, $params);
 	}
 
-	my $cp = Slim::Plugin::ArcamAvrControl::Plugin->clientPrefs($client);
+	my $cp = Plugins::ArcamAvrControl::Plugin->clientPrefs($client);
 
 	# Save (coerce checkboxes to 0/1)
 	if ($params->{saveSettings}) {
