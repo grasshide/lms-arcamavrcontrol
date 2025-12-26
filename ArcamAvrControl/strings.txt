@@ -24,6 +24,12 @@ PLUGIN_ARCAMAVRCONTROL_POWER_ON_ON_PLAY
 PLUGIN_ARCAMAVRCONTROL_FOLLOW_VOLUME
 	EN	Follow player volume
 
+PLUGIN_ARCAMAVRCONTROL_FORCE_FIXED_OUTPUT
+	EN	Force fixed player output (recommended)
+
+PLUGIN_ARCAMAVRCONTROL_FORCE_FIXED_OUTPUT_DESC
+	EN	Sets this player to fixed 100% output (digitalVolumeControl=0) so the LMS volume slider controls only the AVR.
+
 PLUGIN_ARCAMAVRCONTROL_MAXVOLUME
 	EN	Max AVR volume (0-99)
 
@@ -35,6 +41,3 @@ PLUGIN_ARCAMAVRCONTROL_DIRECT_ON_POWERON
 
 PLUGIN_ARCAMAVRCONTROL_DIRECT_ON_POWERON_DESC
 	EN	If enabled, the plugin will send the Direct mode command after powering on.
-
-
-

@@ -43,6 +43,7 @@ sub handler {
 			maxVolume       => $params->{pref_maxVolume},
 			powerOnOnPlay   => $params->{pref_powerOnOnPlay} ? 1 : 0,
 			directOnPowerOn => $params->{pref_directOnPowerOn} ? 1 : 0,
+			forceFixedOutput => $params->{pref_forceFixedOutput} ? 1 : 0,
 		);
 
 		for my $k (keys %toSave) {
@@ -51,6 +52,9 @@ sub handler {
 				$params->{warning} .= sprintf(string('SETTINGS_INVALIDVALUE'), $toSave{$k}, $k) . '<br/>';
 			}
 		}
+
+		# Apply (and potentially restore) fixed-output setting on the player after saving prefs.
+		Plugins::ArcamAvrControl::Plugin->applyFixedOutput($client);
 	}
 
 	# Provide prefs to template
@@ -61,6 +65,7 @@ sub handler {
 	$params->{prefs}->{pref_maxVolume}       = $cp->get('maxVolume');
 	$params->{prefs}->{pref_powerOnOnPlay}   = $cp->get('powerOnOnPlay');
 	$params->{prefs}->{pref_directOnPowerOn} = $cp->get('directOnPowerOn');
+	$params->{prefs}->{pref_forceFixedOutput} = $cp->get('forceFixedOutput');
 
 	return $class->SUPER::handler($client, $params);
 }

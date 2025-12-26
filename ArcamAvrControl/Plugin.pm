@@ -35,6 +35,48 @@ sub _hex {
 	return join(' ', map { sprintf('%02X', $_) } unpack('C*', $bytes));
 }
 
+sub applyFixedOutput {
+	my ($class, $client) = @_;
+	return unless $client && blessed($client);
+
+	my $cp = $class->clientPrefs($client) || return;
+
+	# Only applies when plugin is enabled for this player.
+	my $enabled = _enabled($cp) ? 1 : 0;
+
+	my $serverPrefs = preferences('server')->client($client);
+	my $curDvc = $serverPrefs->get('digitalVolumeControl');
+
+	# If enabled and requested, force fixed output (digitalVolumeControl = 0) and remember prior state.
+	if ( $enabled && $cp->get('forceFixedOutput') ) {
+		if ( !defined $cp->get('savedDigitalVolumeControl') ) {
+			$cp->set('savedDigitalVolumeControl', defined $curDvc ? $curDvc : 1);
+		}
+
+		if ( !defined($curDvc) || $curDvc != 0 ) {
+			my (undef, $ok) = $serverPrefs->set('digitalVolumeControl', 0);
+			if (!$ok) {
+				main::INFOLOG && $log->is_info && $log->info("Unable to set digitalVolumeControl=0 for " . $client->name);
+			} else {
+				main::DEBUGLOG && $log->is_debug && $log->debug("Set digitalVolumeControl=0 (fixed output) for " . $client->name);
+			}
+		}
+		return;
+	}
+
+	# Otherwise, restore if we previously changed it.
+	my $saved = $cp->get('savedDigitalVolumeControl');
+	if ( defined $saved ) {
+		my (undef, $ok) = $serverPrefs->set('digitalVolumeControl', $saved);
+		if (!$ok) {
+			main::INFOLOG && $log->is_info && $log->info("Unable to restore digitalVolumeControl=$saved for " . $client->name);
+		} else {
+			main::DEBUGLOG && $log->is_debug && $log->debug("Restored digitalVolumeControl=$saved for " . $client->name);
+			$cp->set('savedDigitalVolumeControl', undef);
+		}
+	}
+}
+
 sub clientPrefs {
 	my ($class, $client) = @_;
 	return unless $client;
@@ -50,6 +92,7 @@ sub clientPrefs {
 		followVolume    => 1,
 		powerOnOnPlay   => 1,
 		directOnPowerOn => 0,
+		forceFixedOutput => 1,
 	});
 
 	# Coerce legacy/blank values (prevents warning spam + makes UI consistent)
@@ -93,6 +136,7 @@ sub initPlugin {
 	$prefs->setValidate(\&_validateBool01OrEmpty, 'followVolume');
 	$prefs->setValidate(\&_validateBool01OrEmpty, 'powerOnOnPlay');
 	$prefs->setValidate(\&_validateBool01OrEmpty, 'directOnPowerOn');
+	$prefs->setValidate(\&_validateBool01OrEmpty, 'forceFixedOutput');
 
 	if ( main::WEBUI ) {
 		Plugins::ArcamAvrControl::Settings->new;
@@ -115,12 +159,19 @@ sub initPlugin {
 		\&_playlistCmdCallback,
 		[['playlist'], ['play', 'newsong']],
 	);
+
+	# Apply per-player output mode when a player connects/reconnects
+	Slim::Control::Request::subscribe(
+		\&_clientCmdCallback,
+		[['client'], ['new', 'reconnect']],
+	);
 }
 
 sub shutdownPlugin {
 	Slim::Control::Request::unsubscribe(\&_powerCmdCallback);
 	Slim::Control::Request::unsubscribe(\&_mixerCmdCallback);
 	Slim::Control::Request::unsubscribe(\&_playlistCmdCallback);
+	Slim::Control::Request::unsubscribe(\&_clientCmdCallback);
 }
 
 sub _enabled {
@@ -229,6 +280,15 @@ sub _playlistCmdCallback {
 			_powerOn($cp);
 		}
 	);
+}
+
+sub _clientCmdCallback {
+	my ($request) = @_;
+	my $client = $request->client();
+	return unless $client && blessed($client);
+
+	# Ensure we don't accidentally end up with a "double volume" setup.
+	__PACKAGE__->applyFixedOutput($client);
 }
 
 # --- Arcam protocol helpers -------------------------------------------------

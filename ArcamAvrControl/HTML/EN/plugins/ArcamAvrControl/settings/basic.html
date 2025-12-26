@@ -25,6 +25,11 @@
 		<input type="checkbox" class="stdedit" name="pref_followVolume" id="arcamavrcontrol_followvolume" value="1" [% IF prefs.pref_followVolume == 1 %] checked [% END %] >
 	[% END %]
 
+	[% WRAPPER setting title="PLUGIN_ARCAMAVRCONTROL_FORCE_FIXED_OUTPUT" desc="" %]
+		<input type="checkbox" class="stdedit" name="pref_forceFixedOutput" id="arcamavrcontrol_forcefixedoutput" value="1" [% IF prefs.pref_forceFixedOutput == 1 %] checked [% END %] >
+		<div class="prefDesc">[% "PLUGIN_ARCAMAVRCONTROL_FORCE_FIXED_OUTPUT_DESC" | string %]</div>
+	[% END %]
+
 	[% WRAPPER setting title="PLUGIN_ARCAMAVRCONTROL_MAXVOLUME" desc="" %]
 		<input type="text" class="stdedit" name="pref_maxVolume" id="arcamavrcontrol_maxvolume" value="[% prefs.pref_maxVolume | html %]" size="6">
 		<div class="prefDesc">[% "PLUGIN_ARCAMAVRCONTROL_MAXVOLUME_DESC" | string %]</div>
@@ -36,6 +41,5 @@
 	[% END %]
 
 [% PROCESS settings/footer.html %]
-
 
 
