@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+
+<extension>
+	<id>2A9F7C3B-7B0A-4C8D-8DBA-14CE74A0A6C3</id>
+	<name>PLUGIN_ARCAMAVRCONTROL_NAME</name>
+	<module>Slim::Plugin::ArcamAvrControl::Plugin</module>
+	<version>0.1</version>
+	<description>PLUGIN_ARCAMAVRCONTROL_DESC</description>
+	<creator>grasshide</creator>
+	<category>hardware</category>
+
+	<defaultState>enabled</defaultState>
+
+	<optionsURL>plugins/ArcamAvrControl/settings/basic.html</optionsURL>
+	<type>2</type>
+
+	<targetApplication>
+		<id>Lyrion Music Server</id>
+		<minVersion>9.0</minVersion>
+		<maxVersion>*</maxVersion>
+	</targetApplication>
+</extension>
+
+
+

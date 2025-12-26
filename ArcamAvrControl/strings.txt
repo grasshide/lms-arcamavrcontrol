@@ -1,0 +1,40 @@
+# String file for ArcamAvrControl plugin
+
+PLUGIN_ARCAMAVRCONTROL_NAME
+	EN	Arcam AVR Control
+
+PLUGIN_ARCAMAVRCONTROL_DESC
+	EN	Controls an Arcam AVR380 over the network (power, volume, direct mode).
+
+PLUGIN_ARCAMAVRCONTROL_ENABLE
+	EN	Enable
+
+PLUGIN_ARCAMAVRCONTROL_HOST
+	EN	Receiver Host
+
+PLUGIN_ARCAMAVRCONTROL_HOST_DESC
+	EN	Hostname or IP address of your Arcam AVR (TCP).
+
+PLUGIN_ARCAMAVRCONTROL_PORT
+	EN	Receiver Port
+
+PLUGIN_ARCAMAVRCONTROL_POWER_ON_ON_PLAY
+	EN	Power on when playback starts
+
+PLUGIN_ARCAMAVRCONTROL_FOLLOW_VOLUME
+	EN	Follow player volume
+
+PLUGIN_ARCAMAVRCONTROL_MAXVOLUME
+	EN	Max AVR volume (0-99)
+
+PLUGIN_ARCAMAVRCONTROL_MAXVOLUME_DESC
+	EN	Rescale player volume (0-100) into AVR volume (0-max). Example: if max is 40, then 100% -> 40 and 50% -> 20.
+
+PLUGIN_ARCAMAVRCONTROL_DIRECT_ON_POWERON
+	EN	Enable Direct mode on power on
+
+PLUGIN_ARCAMAVRCONTROL_DIRECT_ON_POWERON_DESC
+	EN	If enabled, the plugin will send the Direct mode command after powering on.
+
+
+
