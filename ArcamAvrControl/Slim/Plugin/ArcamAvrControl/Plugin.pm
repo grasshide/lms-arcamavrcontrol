@@ -3,7 +3,6 @@ package Slim::Plugin::ArcamAvrControl::Plugin;
 # Lyrion Music Server / Logitech Media Server plugin
 # Basic network control for Arcam AVR380 (power, volume, direct mode)
 
-
 use strict;
 use base qw(Slim::Plugin::Base);
 

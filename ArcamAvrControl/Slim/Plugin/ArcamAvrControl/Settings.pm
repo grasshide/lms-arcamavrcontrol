@@ -10,8 +10,15 @@ use Slim::Utils::Strings qw(string);
 
 my $prefs = preferences('plugin.arcamavrcontrol');
 
+my $csrfAvailable = eval {
+	require Slim::Web::HTTP::CSRF;
+	1;
+};
+
 sub name {
-	return Slim::Web::HTTP::CSRF->protectName('PLUGIN_ARCAMAVRCONTROL_NAME');
+	return $csrfAvailable
+		? Slim::Web::HTTP::CSRF->protectName('PLUGIN_ARCAMAVRCONTROL_NAME')
+		: 'PLUGIN_ARCAMAVRCONTROL_NAME';
 }
 
 sub needsClient {
@@ -19,7 +26,9 @@ sub needsClient {
 }
 
 sub page {
-	return Slim::Web::HTTP::CSRF->protectURI('plugins/ArcamAvrControl/settings/basic.html');
+	return $csrfAvailable
+		? Slim::Web::HTTP::CSRF->protectURI('plugins/ArcamAvrControl/settings/basic.html')
+		: 'plugins/ArcamAvrControl/settings/basic.html';
 }
 
 sub handler {
