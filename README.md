@@ -44,6 +44,9 @@ If you enable **Force fixed player output**, the plugin forces the LMS player to
 
 When you disable the option (or disable the plugin for that player), the plugin restores the player’s previous `digitalVolumeControl` value.
 
+Note: If you are using the Material Skin client, you must make this change to support 100% volume processing: Settings->Server->Material Skin->Fixed volume players => 'Display standard volume control'.
+
+
 ## Debug logging
 
 Enable logging category `plugin.arcamavrcontrol` at DEBUG to see:
