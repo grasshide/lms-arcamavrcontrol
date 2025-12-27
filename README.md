@@ -20,9 +20,7 @@ In **Settings → Player → Arcam AVR Control**, configure:
 
 ## Install (via “Additional Repositories”)
 
-This repo includes an `extensions.xml` template for LMS’ Extensions Manager. Host it (eg GitHub Pages) and add its URL in:
-
-- LMS Web UI → **Settings → Plugins → Additional Repositories**
+This repo can be added in the LMS Extensions Manager directly for easy installation. Add the URL: `https://raw.githubusercontent.com/grasshide/lms-arcamavrcontrol/refs/heads/main/public.xml`at the buttom of the plugin page: LMS Web UI → **Settings → Server → Manage Plugins → Additional Repositories**
 
 ## Volume scaling
 
@@ -44,7 +42,7 @@ If you enable **Force fixed player output**, the plugin forces the LMS player to
 
 When you disable the option (or disable the plugin for that player), the plugin restores the player’s previous `digitalVolumeControl` value.
 
-Note: If you are using the Material Skin client, you must make this change to support 100% volume processing: Settings->Server->Material Skin->Fixed volume players => 'Display standard volume control'.
+Note: If you are using the Material Skin client, you must make this change to support 100% volume processing: **Settings → Server → Material Skin → Fixed volume players → 'Display standard volume control'**.
 
 
 ## Debug logging
