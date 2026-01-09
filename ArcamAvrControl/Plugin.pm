@@ -354,14 +354,18 @@ sub _sendRawFrame {
 }
 
 sub _powerOn {
-	my ($cp) = @_;
-	# Corrected power command from Arcam doc (SH256E Issue 2):
-	# 0x21 0x01 0x08 0x02 0x10 0x7B 0x0D
-	my $frame = pack('C7', 0x21, 0x01, 0x08, 0x02, 0x10, 0x7B, 0x0D);
-	_sendRawFrame($cp, $frame, 'powerOn');
-	if ($cp->get('directOnPowerOn')) {
-		_sendFrame($cp, 0x0F, 0x01);
-	}
+    my ($cp) = @_;
+
+    my $frame = pack('C7', 0x21, 0x01, 0x08, 0x02, 0x10, 0x7B, 0x0D);
+    _sendRawFrame($cp, $frame, 'powerOn');
+
+    if ($cp->get('directOnPowerOn')) {
+        Slim::Utils::Timers::setTimer(
+            undef,
+            Time::HiRes::time() + 2,
+            sub { _sendFrame($cp, 0x0F, 0x01); }
+        );
+    }
 }
 
 sub _powerOff {

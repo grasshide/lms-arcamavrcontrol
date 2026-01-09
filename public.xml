@@ -7,8 +7,8 @@
 		<plugin name="ArcamAvrControl" version="0.1" minTarget="9.0" maxTarget="*">
 			<title lang="EN">Arcam AVR Control</title>
 			<desc lang="EN">Controls an Arcam AVR over network.</desc>
-			<url>https://github.com/grasshide/lms-arcamavrcontrol/releases/download/0.1/ArcamAvrControl-0.1.zip</url>
-			<sha>8fc43b710e338b1dde4ce3498bc83b84fac57edf</sha>
+			<url>https://github.com/grasshide/lms-arcamavrcontrol/releases/download/0.1/ArcamAvrControl-0.2.zip</url>
+			<sha>0182f9531bfb2d7f3318b1475169ae917f032131</sha>
 			<creator>grasshide</creator>
 		</plugin>
 	</plugins>

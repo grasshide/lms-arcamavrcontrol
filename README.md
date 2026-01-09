@@ -56,7 +56,7 @@ Enable logging category `plugin.arcamavrcontrol` at DEBUG to see:
 
 Create a release:
 ```bash
-VERSION="0.1"
+VERSION="0.2"
 zip -r "ArcamAvrControl-${VERSION}.zip" ArcamAvrControl
 shasum -a 1 "ArcamAvrControl-${VERSION}.zip"
 ```
