@@ -8,7 +8,7 @@
 			<title lang="EN">Arcam AVR Control</title>
 			<desc lang="EN">Controls an Arcam AVR over network.</desc>
 			<url>https://github.com/grasshide/lms-arcamavrcontrol/releases/download/0.2/ArcamAvrControl-0.2.zip</url>
-			<sha>0182f9531bfb2d7f3318b1475169ae917f032131</sha>
+			<sha>64cb858c04e2c5467b0efc7181e5d582e040f141</sha>
 			<creator>grasshide</creator>
 		</plugin>
 	</plugins>
