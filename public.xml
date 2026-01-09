@@ -4,7 +4,7 @@
     <title lang="EN">ArcamAvrControl</title>
   </details>
 	<plugins>
-		<plugin name="ArcamAvrControl" version="0.1" minTarget="9.0" maxTarget="*">
+		<plugin name="ArcamAvrControl" version="0.2" minTarget="9.0" maxTarget="*">
 			<title lang="EN">Arcam AVR Control</title>
 			<desc lang="EN">Controls an Arcam AVR over network.</desc>
 			<url>https://github.com/grasshide/lms-arcamavrcontrol/releases/download/0.2/ArcamAvrControl-0.2.zip</url>
